@@ -12,4 +12,5 @@ cryptography
 lxml
 beautifulsoup4
 fake-useragent
-tempmail.lol
+tempmail-lol2
+
