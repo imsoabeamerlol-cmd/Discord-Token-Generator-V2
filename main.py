@@ -356,6 +356,7 @@ class DiscordBot:
         )
         token = None
 
+        
         for _ in range(25):
             token = await self.extract_token(page)
             if token and len(str(token)) > 30:
@@ -389,7 +390,7 @@ class DiscordBot:
                     f"{gradient_text(f'[-]  Error navigating to link: {e}', Theme.GRADIENT_GRAY)}"
                 )
 
-                for _ in range(4):
+        for _ in range(4):
             is_verified = await self.check_is_verified(token)
             if is_verified:
                 print(
