@@ -12,3 +12,4 @@ cryptography
 lxml
 beautifulsoup4
 fake-useragent
+pip install tempmail.lol
