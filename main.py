@@ -57,7 +57,7 @@ class Theme:
     END = "\033[0m"
 
     GRADIENT_GRAY = [
-        "\033[90m",  
+        "\033[90m",
         "\033[38;2;140;140;140m",
         "\033[38;2;100;100;100m",
         "\033[38;2;70;70;70m",
@@ -65,7 +65,7 @@ class Theme:
     ]
 
     GRADIENT_WHITE = [
-        "\033[38;2;255;255;255m",  
+        "\033[38;2;255;255;255m",
         "\033[38;2;230;230;230m",
         "\033[38;2;200;200;200m",
         "\033[38;2;170;170;170m",
@@ -125,7 +125,6 @@ def show_glitch_art():
     while time.time() - start_time < 3.5:
         os.system("cls" if os.name == "nt" else "clear")
 
-
         if random.random() < 0.15:
             time.sleep(0.08)
             continue
@@ -134,7 +133,6 @@ def show_glitch_art():
 
         colored_art = ""
         for line in art.split("\n"):
-         
             if random.random() < 0.08:
                 line = line.replace(" ", random.choice([".", "-", "`", " "]))
 
@@ -145,13 +143,13 @@ def show_glitch_art():
 
         print("\n\n" + colored_art)
 
-       
-        subtitle = "K E N Z   V 2" if random.random() > 0.7 else "KenzShop For Premium Tools"
+        subtitle = (
+            "K E N Z   V 2" if random.random() > 0.7 else "KenzShop For Premium Tools"
+        )
         print(f"\n{gradient_text(subtitle.center(50), Theme.GRADIENT_WHITE)}")
 
         time.sleep(random.uniform(0.05, 0.2))
 
-        
         if random.random() > 0.2:
             current_frame_idx += 1
 
@@ -237,15 +235,10 @@ class EmailManager:
             except Exception:
                 await asyncio.sleep(1)
 
-        generatemail = ["user", "admin", "client", "member"]
-        prefix = random.choice(generatemail).lower() + str(
-            random.randint(100000, 999999)
-        )
-        self.email = f"{prefix}"
         print(
-            f"{gradient_text(f'[+]  Email Generated: {self.email}', Theme.GRADIENT_WHITE)}"
+            f"{gradient_text('[-]  Failed to generate email after 3 attempts.', Theme.GRADIENT_GRAY)}"
         )
-        return self.email
+        return None
 
     async def get_verification_link(self):
         if not self.inb:
@@ -263,7 +256,6 @@ class EmailManager:
                             getattr(email, "html", "")
                         )
 
-                       
                         body = (
                             body.replace("&amp;", "&")
                             .replace("=\r\n", "")
@@ -356,7 +348,6 @@ class DiscordBot:
         )
         token = None
 
-        
         for _ in range(25):
             token = await self.extract_token(page)
             if token and len(str(token)) > 30:
@@ -384,7 +375,7 @@ class DiscordBot:
             )
             try:
                 verify_tab = await self.browser.get(verify_link)
-                await asyncio.sleep(10)  
+                await asyncio.sleep(10)
             except Exception as e:
                 print(
                     f"{gradient_text(f'[-]  Error navigating to link: {e}', Theme.GRADIENT_GRAY)}"
@@ -406,6 +397,9 @@ class DiscordBot:
 
     async def start(self):
         self.email = await self.email_mgr.generate_email()
+        if not self.email:
+            return
+
         print(
             f"{gradient_text(f'▶ Opening Browser for Account #{self.index}', Theme.GRADIENT_WHITE)}"
         )
@@ -479,7 +473,6 @@ class DiscordBot:
             await page.evaluate(inject_script)
             await asyncio.sleep(random.uniform(0.8, 1.4))
 
-            
             ca.press("tab")
             await asyncio.sleep(random.uniform(0.1, 0.3))
 
