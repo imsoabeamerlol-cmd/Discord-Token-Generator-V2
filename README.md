@@ -50,8 +50,8 @@
 
 ```bash
 # Clone the repository
-git clone https://github.com/KenzCybSec/Discord-Token-Gen
-cd Discord-Token-Generator
+git clone https://github.com/KenzCybSec/Discord-Token-Gen-V2
+cd Discord-Token-Generator-V2
 
 # Install dependencies
 pip install -r requirements.txt
